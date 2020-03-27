@@ -1,4 +1,4 @@
-name: 'MeTestAction'
+name: 'typescript-action'
 description: 'MeTestAction'
 author: 'Marco Eidinger'
 inputs:
