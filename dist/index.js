@@ -28606,11 +28606,14 @@ function handlePullRequest(client, context, config) {
                 const reviewers = utils.chooseReviewers(owner, config);
                 if (reviewers.length > 0) {
                     yield pr.addReviewers(reviewers);
-                    core.info(`Added reviewers to PR #${number}: ${reviewers.join(', ')}`);
+                    console.log(`Added reviewers to PR #${number}: ${reviewers.join(', ')}`);
+                }
+                else {
+                    console.log('No reviewers');
                 }
             }
             catch (error) {
-                core.warning(error.message);
+                console.log(error.message);
             }
         }
         if (addAssignees) {
@@ -28618,11 +28621,14 @@ function handlePullRequest(client, context, config) {
                 const assignees = utils.chooseAssignees(owner, config);
                 if (assignees.length > 0) {
                     yield pr.addAssignees(assignees);
-                    core.info(`Added assignees to PR #${number}: ${assignees.join(', ')}`);
+                    console.log(`Added assignees to PR #${number}: ${assignees.join(', ')}`);
+                }
+                else {
+                    console.log('No assignees');
                 }
             }
             catch (error) {
-                core.warning(error.message);
+                console.log(error.message);
             }
         }
     });
