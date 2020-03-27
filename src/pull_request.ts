@@ -49,38 +49,36 @@ export class PullRequest {
       pull_number: issue_number
     })
 
-    if (
-      listFilesResponse
-    ) {
-		console.log('ok ??')
-		if ( listFilesResponse.hasOwnProperty('data') === true ) {
-			console.log('has')
-		} else {
-			console.log('has not')
-			return true
-		}
-	}
+    if (listFilesResponse) {
+      console.log('ok ??')
+      if (listFilesResponse.hasOwnProperty('data') === true) {
+        console.log('has')
+      } else {
+        console.log('has not')
+        return true
+      }
+    }
 
-	console.log(listFilesResponse)
+    console.log(listFilesResponse)
 
     const changedFiles = listFilesResponse.data.map(f => f.filename)
     const patches = listFilesResponse.data.map(f => f.patch)
 
     console.log('found changed files:')
     for (const file of changedFiles) {
-		console.log('  ' + file)
-	}
+      console.log('  ' + file)
+    }
 
-	console.log('found changed files:')
+    console.log('found changed files:')
     for (const patch of patches) {
-		if (patch.startsWith('+') && patch.includes('public')) {
-			console.log('relevant: add')
-			return true
-		}
-		if (patch.startsWith('-') && patch.includes('public')) {
-			console.log('relevant: remove')
-			return true
-		}
+      if (patch.startsWith('+') && patch.includes('public')) {
+        console.log('relevant: add')
+        return true
+      }
+      if (patch.startsWith('-') && patch.includes('public')) {
+        console.log('relevant: remove')
+        return true
+      }
     }
 
     return true

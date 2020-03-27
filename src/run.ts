@@ -5,18 +5,18 @@ import * as handler from './handler'
 
 export async function run() {
   try {
-    const token = core.getInput('repo-token', { required: true })
+    const token = core.getInput('repo-token', {required: true})
     const configPath = core.getInput('configuration-path', {
-      required: true,
+      required: true
     })
 
     const client = new github.GitHub(token)
-    const { repo, sha } = github.context
+    const {repo, sha} = github.context
     const config = await utils.fetchConfigurationFile(client, {
       owner: repo.owner,
       repo: repo.repo,
       path: configPath,
-      ref: sha,
+      ref: sha
     })
 
     await handler.handlePullRequest(client, github.context, config)

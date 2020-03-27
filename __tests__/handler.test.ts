@@ -1,6 +1,6 @@
 import * as github from '@actions/github'
 import * as core from '@actions/core'
-import { Context } from '@actions/github/lib/context'
+import {Context} from '@actions/github/lib/context'
 import * as handler from '../src/handler'
 
 jest.mock('@actions/core')
@@ -23,28 +23,27 @@ describe('handlePullRequest', () => {
           labels: [],
           title: 'test',
           user: {
-            login: 'pr-creator',
-		  },
-
+            login: 'pr-creator'
+          }
         },
         repository: {
           name: 'auto-assign',
           owner: {
-            login: 'kentaro-m',
-          },
-        },
+            login: 'kentaro-m'
+          }
+        }
       },
       repo: {
         owner: 'kentaro-m',
-        repo: 'auto-assign',
+        repo: 'auto-assign'
       },
       issue: {
         owner: 'kentaro-m',
         repo: 'auto-assign',
-        number: 1,
+        number: 1
       },
       sha: '',
-      ref: '',
+      ref: ''
     }
   })
 
@@ -57,7 +56,7 @@ describe('handlePullRequest', () => {
       addReviewers: true,
       numberOfReviewers: 0,
       reviewers: ['reviewer1', 'reviewer2', 'reviewer3'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     expect(handler.handlePullRequest(client, context, config)).rejects.toThrow(
@@ -76,7 +75,7 @@ describe('handlePullRequest', () => {
       addReviewers: true,
       numberOfReviewers: 0,
       reviewers: ['reviewer1', 'reviewer2', 'reviewer3'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     await handler.handlePullRequest(client, context, config)
@@ -97,7 +96,7 @@ describe('handlePullRequest', () => {
       addReviewers: true,
       numberOfReviewers: 0,
       reviewers: ['reviewer1', 'reviewer2', 'reviewer3'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     await handler.handlePullRequest(client, context, config)
@@ -113,26 +112,25 @@ describe('handlePullRequest', () => {
       addReviewers: true,
       numberOfReviewers: 0,
       reviewers: ['reviewer1', 'reviewer2', 'reviewer3', 'pr-creator'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     const client = new github.GitHub('token')
 
     client.issues = {
       // tslint:disable-next-line:no-empty
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
 
     client.pulls = {
       // tslint:disable-next-line:no-empty
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-	  listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: []
+        }
+      })
     } as any
 
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
@@ -155,14 +153,13 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
     const createReviewRequestSpy = jest.spyOn(
       client.pulls,
@@ -170,13 +167,13 @@ describe('handlePullRequest', () => {
     )
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
 
     // GIVEN
     const config = {
-      addAssignees: 'author',
+      addAssignees: 'author'
     } as any
 
     // WHEN
@@ -193,23 +190,22 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
 
     // GIVEN
     const config = {
-      addAssignees: 'test',
+      addAssignees: 'test'
     } as any
 
     try {
@@ -229,26 +225,25 @@ describe('handlePullRequest', () => {
       addReviewers: false,
       numberOfReviewers: 0,
       reviewers: ['reviewer1', 'reviewer2', 'reviewer3', 'pr-creator'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     const client = new github.GitHub('token')
 
     client.issues = {
       // tslint:disable-next-line:no-empty
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
 
     client.pulls = {
       // tslint:disable-next-line:no-empty
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
 
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
@@ -275,26 +270,25 @@ describe('handlePullRequest', () => {
       numberOfAssignees: 2,
       numberOfReviewers: 0,
       reviewers: ['reviewer1', 'reviewer2', 'reviewer3'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     const client = new github.GitHub('token')
 
     client.issues = {
       // tslint:disable-next-line:no-empty
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
 
     client.pulls = {
       // tslint:disable-next-line:no-empty
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
 
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
@@ -319,26 +313,25 @@ describe('handlePullRequest', () => {
       assignees: ['assignee1', 'assignee2', 'assignee3'],
       numberOfReviewers: 2,
       reviewers: ['reviewer1', 'reviewer2', 'reviewer3'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     const client = new github.GitHub('token')
 
     client.issues = {
       // tslint:disable-next-line:no-empty
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
 
     client.pulls = {
       // tslint:disable-next-line:no-empty
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
 
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
@@ -363,26 +356,25 @@ describe('handlePullRequest', () => {
       addReviewers: true,
       numberOfReviewers: 0,
       reviewers: ['pr-creator'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     const client = new github.GitHub('token')
 
     client.issues = {
       // tslint:disable-next-line:no-empty
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
 
     client.pulls = {
       // tslint:disable-next-line:no-empty
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
 
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
@@ -404,34 +396,32 @@ describe('handlePullRequest', () => {
       assignees: ['maintainerX', 'maintainerY'],
       numberOfReviewers: 0,
       reviewers: ['reviewerA', 'reviewerB'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     const client = new github.GitHub('token')
 
     client.issues = {
       // tslint:disable-next-line:no-empty
-	  addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {}),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
 
     client.pulls = {
       createReviewRequest: jest.fn().mockImplementation(async () => {
         throw new Error('Review cannot be requested from pull request author.')
-	  }),
+      }),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
 
     const spy = jest.spyOn(client.issues, 'addAssignees')
@@ -449,7 +439,7 @@ describe('handlePullRequest', () => {
       assignees: ['maintainerX', 'maintainerY'],
       numberOfReviewers: 0,
       reviewers: ['reviewerA', 'reviewerB'],
-      skipKeywords: ['wip'],
+      skipKeywords: ['wip']
     } as any
 
     const client = new github.GitHub('token')
@@ -457,26 +447,24 @@ describe('handlePullRequest', () => {
     client.issues = {
       addAssignees: jest.fn().mockImplementation(async () => {
         throw new Error('failed to add assignees.')
-	  }),
+      }),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
 
     client.pulls = {
       // tslint:disable-next-line:no-empty
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-	  listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: []
+        }
+      })
     } as any
 
     const spy = jest.spyOn(client.pulls, 'createReviewRequest')
@@ -509,7 +497,7 @@ describe('handlePullRequest', () => {
     try {
       // GIVEN
       const config = {
-        useReviewGroups: true,
+        useReviewGroups: true
       } as any
 
       const client = new github.GitHub('token')
@@ -530,7 +518,7 @@ describe('handlePullRequest', () => {
     try {
       // GIVEN
       const config = {
-        useAssigneeGroups: true,
+        useAssigneeGroups: true
       } as any
 
       const client = new github.GitHub('token')
@@ -552,14 +540,13 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-	  listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: []
+        }
+      })
     } as any
     const createReviewRequestSpy = jest.spyOn(
       client.pulls,
@@ -567,7 +554,7 @@ describe('handlePullRequest', () => {
     )
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
 
@@ -578,7 +565,7 @@ describe('handlePullRequest', () => {
       useReviewGroups: true,
       numberOfReviewers: 1,
       reviewers: ['reviewer1', 'reviewer2', 'reviewer3'],
-      reviewGroups: [],
+      reviewGroups: []
     } as any
 
     // WHEN
@@ -597,14 +584,13 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-	  listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: []
+        }
+      })
     } as any
     const createReviewRequestSpy = jest.spyOn(
       client.pulls,
@@ -612,7 +598,7 @@ describe('handlePullRequest', () => {
     )
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
 
@@ -624,8 +610,8 @@ describe('handlePullRequest', () => {
       numberOfReviewers: 1,
       reviewGroups: {
         groupA: ['group1-user1', 'group1-user2', 'group1-user3'],
-        groupB: ['group2-user1', 'group2-user2', 'group2-user3'],
-      },
+        groupB: ['group2-user1', 'group2-user2', 'group2-user3']
+      }
     } as any
 
     // WHEN
@@ -647,14 +633,13 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-	  listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: []
+        }
+      })
     } as any
     const createReviewRequestSpy = jest.spyOn(
       client.pulls,
@@ -662,7 +647,7 @@ describe('handlePullRequest', () => {
     )
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
 
@@ -674,8 +659,8 @@ describe('handlePullRequest', () => {
       numberOfReviewers: 2,
       reviewGroups: {
         groupA: ['group1-user1', 'group1-user2', 'group1-user3'],
-        groupB: ['group2-user1'],
-      },
+        groupB: ['group2-user1']
+      }
     } as any
 
     // WHEN
@@ -700,14 +685,13 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
       listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+        return {
+          data: []
+        }
+      })
     } as any
     const createReviewRequestSpy = jest.spyOn(
       client.pulls,
@@ -715,7 +699,7 @@ describe('handlePullRequest', () => {
     )
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
 
@@ -730,8 +714,8 @@ describe('handlePullRequest', () => {
       assigneeGroups: {
         groupA: ['group1-user1', 'group1-user2', 'group1-user3'],
         groupB: ['group2-user1'],
-        groupC: ['group3-user1', 'group3-user2', 'group3-user3'],
-      },
+        groupC: ['group3-user1', 'group3-user2', 'group3-user3']
+      }
     } as any
 
     // WHEN
@@ -750,14 +734,13 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-	  listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: []
+        }
+      })
     } as any
     const createReviewRequestSpy = jest.spyOn(
       client.pulls,
@@ -765,7 +748,7 @@ describe('handlePullRequest', () => {
     )
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
 
@@ -779,8 +762,8 @@ describe('handlePullRequest', () => {
       assigneeGroups: {
         groupA: ['group1-user1', 'group1-user2', 'group1-user3'],
         groupB: ['group2-user1'],
-        groupC: ['group3-user1', 'group3-user2', 'group3-user3'],
-      },
+        groupC: ['group3-user1', 'group3-user2', 'group3-user3']
+      }
     } as any
 
     // WHEN
@@ -799,14 +782,13 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-	  listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: []
+        }
+      })
     } as any
     const createReviewRequestSpy = jest.spyOn(
       client.pulls,
@@ -814,7 +796,7 @@ describe('handlePullRequest', () => {
     )
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
 
@@ -828,8 +810,8 @@ describe('handlePullRequest', () => {
       assigneeGroups: {
         groupA: ['group1-user1', 'group1-user2', 'group1-user3'],
         groupB: ['group2-user1'],
-        groupC: ['group3-user1', 'group3-user2', 'group3-user3'],
-      },
+        groupC: ['group3-user1', 'group3-user2', 'group3-user3']
+      }
     } as any
 
     // WHEN
@@ -848,14 +830,13 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-	  listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: []
+        }
+      })
     } as any
     const createReviewRequestSpy = jest.spyOn(
       client.pulls,
@@ -863,7 +844,7 @@ describe('handlePullRequest', () => {
     )
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
 
@@ -878,8 +859,8 @@ describe('handlePullRequest', () => {
       assigneeGroups: {
         groupA: ['group1-user1', 'group1-user2', 'group1-user3'],
         groupB: ['group2-user1'],
-        groupC: ['group3-user1', 'group3-user2', 'group3-user3'],
-      },
+        groupC: ['group3-user1', 'group3-user2', 'group3-user3']
+      }
     } as any
 
     // WHEN
@@ -905,13 +886,12 @@ describe('handlePullRequest', () => {
 
     // MOCKS
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
-	  listFiles: jest.fn().mockImplementation(async () => {
-		return {
-		  data: []
-		}
-	}),
-
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: []
+        }
+      })
     } as any
     const createReviewRequestSpy = jest.spyOn(
       client.pulls,
@@ -919,7 +899,7 @@ describe('handlePullRequest', () => {
     )
 
     client.issues = {
-      addAssignees: jest.fn().mockImplementation(async () => {}),
+      addAssignees: jest.fn().mockImplementation(async () => {})
     } as any
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
 
@@ -934,8 +914,8 @@ describe('handlePullRequest', () => {
       reviewGroups: {
         groupA: ['group1-reviewer1', 'group1-reviewer2', 'group1-reviewer3'],
         groupB: ['group2-reviewer1'],
-        groupC: ['group3-reviewer1', 'group3-reviewer2', 'group3-reviewer3'],
-      },
+        groupC: ['group3-reviewer1', 'group3-reviewer2', 'group3-reviewer3']
+      }
     } as any
 
     // WHEN
@@ -957,63 +937,63 @@ describe('handlePullRequest', () => {
     )
   })
 
-//   test('skips pull requests that do not have any of the filterLabels.include labels', async () => {
-//     const spy = jest.spyOn(core, 'info')
+  //   test('skips pull requests that do not have any of the filterLabels.include labels', async () => {
+  //     const spy = jest.spyOn(core, 'info')
 
-//     const client = new github.GitHub('token')
-//     const config = {
-//       filterLabels: { include: ['test_label'] },
-//     } as any
+  //     const client = new github.GitHub('token')
+  //     const config = {
+  //       filterLabels: { include: ['test_label'] },
+  //     } as any
 
-//     context.payload.pull_request.labels = [{ name: 'some_label' }]
+  //     context.payload.pull_request.labels = [{ name: 'some_label' }]
 
-//     await handler.handlePullRequest(client, context, config)
+  //     await handler.handlePullRequest(client, context, config)
 
-//     expect(spy.mock.calls[0][0]).toEqual(
-//       'Skips the process to add reviewers/assignees since PR is not tagged with any of the filterLabels.include'
-//     )
-//   })
+  //     expect(spy.mock.calls[0][0]).toEqual(
+  //       'Skips the process to add reviewers/assignees since PR is not tagged with any of the filterLabels.include'
+  //     )
+  //   })
 
-//   test('skips pull requests that have any of the filterLabels.exclude labels', async () => {
-//     const spy = jest.spyOn(core, 'info')
+  //   test('skips pull requests that have any of the filterLabels.exclude labels', async () => {
+  //     const spy = jest.spyOn(core, 'info')
 
-//     const client = new github.GitHub('token')
-//     const config = {
-//       filterLabels: { include: ['test_label'], exclude: ['wip'] },
-//     } as any
+  //     const client = new github.GitHub('token')
+  //     const config = {
+  //       filterLabels: { include: ['test_label'], exclude: ['wip'] },
+  //     } as any
 
-//     context.payload.pull_request.labels = [
-//       { name: 'test_label' },
-//       { name: 'wip' },
-//     ]
+  //     context.payload.pull_request.labels = [
+  //       { name: 'test_label' },
+  //       { name: 'wip' },
+  //     ]
 
-//     await handler.handlePullRequest(client, context, config)
+  //     await handler.handlePullRequest(client, context, config)
 
-//     expect(spy.mock.calls[0][0]).toEqual(
-//       'Skips the process to add reviewers/assignees since PR is tagged with any of the filterLabels.exclude'
-//     )
-//   })
+  //     expect(spy.mock.calls[0][0]).toEqual(
+  //       'Skips the process to add reviewers/assignees since PR is tagged with any of the filterLabels.exclude'
+  //     )
+  //   })
 
   test('adds reviewers to the pull request when it has any of the configured labels', async () => {
     const config = {
       addAssignees: false,
       addReviewers: true,
-      filterLabels: { include: ['some_label', 'another_label'] },
+      filterLabels: {include: ['some_label', 'another_label']},
       numberOfReviewers: 0,
-      reviewers: ['reviewer1', 'reviewer2', 'reviewer3', 'pr-creator'],
+      reviewers: ['reviewer1', 'reviewer2', 'reviewer3', 'pr-creator']
     } as any
 
     const client = new github.GitHub('token')
 
-    context.payload.pull_request.labels = [{ name: 'some_label' }]
+    context.payload.pull_request.labels = [{name: 'some_label'}]
 
     client.pulls = {
-	  createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
       listFiles: jest.fn().mockImplementation(async () => {
-		  return {
-			data: []
-		  }
-	  }),
+        return {
+          data: []
+        }
+      })
     } as any
 
     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')

@@ -28249,7 +28249,7 @@ function chooseReviewers(owner, config) {
 }
 exports.chooseReviewers = chooseReviewers;
 function chooseAssignees(owner, config) {
-    const { useAssigneeGroups, assigneeGroups, addAssignees, numberOfAssignees, numberOfReviewers, assignees, reviewers, } = config;
+    const { useAssigneeGroups, assigneeGroups, addAssignees, numberOfAssignees, numberOfReviewers, assignees, reviewers } = config;
     let chosenAssignees = [];
     const useGroups = useAssigneeGroups && Object.keys(assigneeGroups).length > 0;
     if (typeof addAssignees === 'string') {
@@ -28303,7 +28303,7 @@ function fetchConfigurationFile(client, options) {
             owner,
             repo,
             path,
-            ref,
+            ref
         });
         const data = result.data;
         if (!data.content) {
@@ -28562,7 +28562,7 @@ function handlePullRequest(client, context, config) {
             throw new Error('the webhook payload is not exist');
         }
         const { title, draft, user, number } = context.payload.pull_request;
-        const { skipKeywords, useReviewGroups, useAssigneeGroups, reviewGroups, assigneeGroups, addReviewers, addAssignees, filterLabels, } = config;
+        const { skipKeywords, useReviewGroups, useAssigneeGroups, reviewGroups, assigneeGroups, addReviewers, addAssignees, filterLabels } = config;
         if (skipKeywords && utils.includesSkipKeywords(title, skipKeywords)) {
             core.info('Skips the process to add reviewers/assignees since PR title includes skip-keywords');
             return;
@@ -44687,7 +44687,7 @@ function run() {
         try {
             const token = core.getInput('repo-token', { required: true });
             const configPath = core.getInput('configuration-path', {
-                required: true,
+                required: true
             });
             const client = new github.GitHub(token);
             const { repo, sha } = github.context;
@@ -44695,7 +44695,7 @@ function run() {
                 owner: repo.owner,
                 repo: repo.repo,
                 path: configPath,
-                ref: sha,
+                ref: sha
             });
             yield handler.handlePullRequest(client, github.context, config);
         }

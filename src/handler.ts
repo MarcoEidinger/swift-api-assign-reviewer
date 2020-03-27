@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import { Context } from '@actions/github/lib/context'
+import {Context} from '@actions/github/lib/context'
 import * as utils from './utils'
-import { PullRequest } from './pull_request'
+import {PullRequest} from './pull_request'
 
 export interface Config {
   addReviewers: boolean
@@ -18,8 +18,8 @@ export interface Config {
   skipKeywords: string[]
   useReviewGroups: boolean
   useAssigneeGroups: boolean
-  reviewGroups: { [key: string]: string[] }
-  assigneeGroups: { [key: string]: string[] }
+  reviewGroups: {[key: string]: string[]}
+  assigneeGroups: {[key: string]: string[]}
 }
 
 export async function handlePullRequest(
@@ -31,7 +31,7 @@ export async function handlePullRequest(
     throw new Error('the webhook payload is not exist')
   }
 
-  const { title, draft, user, number } = context.payload.pull_request
+  const {title, draft, user, number} = context.payload.pull_request
   const {
     skipKeywords,
     useReviewGroups,
@@ -40,7 +40,7 @@ export async function handlePullRequest(
     assigneeGroups,
     addReviewers,
     addAssignees,
-    filterLabels,
+    filterLabels
   } = config
 
   if (skipKeywords && utils.includesSkipKeywords(title, skipKeywords)) {

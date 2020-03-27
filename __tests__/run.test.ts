@@ -1,7 +1,7 @@
-import { mocked } from 'ts-jest/utils'
+import {mocked} from 'ts-jest/utils'
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import { run } from '../src/run'
+import {run} from '../src/run'
 import * as utils from '../src/utils'
 import * as handler from '../src/handler'
 
@@ -29,27 +29,27 @@ describe.only('run', () => {
           number: 1,
           title: 'test',
           user: {
-            login: 'pr-creator',
-          },
+            login: 'pr-creator'
+          }
         },
         repository: {
           name: 'auto-assign',
           owner: {
-            login: 'kentaro-m',
-          },
-        },
+            login: 'kentaro-m'
+          }
+        }
       },
       repo: {
         owner: 'kentaro-m',
-        repo: 'auto-assign',
+        repo: 'auto-assign'
       },
       issue: {
         owner: 'kentaro-m',
         repo: 'auto-assign',
-        number: 1,
+        number: 1
       },
       sha: '',
-      ref: '',
+      ref: ''
     }
   })
 
@@ -66,7 +66,7 @@ describe.only('run', () => {
     mockedUtils.fetchConfigurationFile.mockImplementation(async () => ({
       addAssignees: false,
       addReviewers: true,
-      reviewers: ['reviewerA', 'reviewerB', 'reviewerC'],
+      reviewers: ['reviewerA', 'reviewerB', 'reviewerC']
     }))
 
     mockedHandler.handlePullRequest.mockImplementation(async () => {})

@@ -1,10 +1,10 @@
 import _ from 'lodash'
 import * as github from '@actions/github'
 import * as yaml from 'js-yaml'
-import { Config } from './handler'
+import {Config} from './handler'
 
 export function chooseReviewers(owner: string, config: Config): string[] {
-  const { useReviewGroups, reviewGroups, numberOfReviewers, reviewers } = config
+  const {useReviewGroups, reviewGroups, numberOfReviewers, reviewers} = config
   let chosenReviewers: string[] = []
   const useGroups: boolean =
     useReviewGroups && Object.keys(reviewGroups).length > 0
@@ -30,7 +30,7 @@ export function chooseAssignees(owner: string, config: Config): string[] {
     numberOfAssignees,
     numberOfReviewers,
     assignees,
-    reviewers,
+    reviewers
   } = config
   let chosenAssignees: string[] = []
 
@@ -94,7 +94,7 @@ export function includesSkipKeywords(
 
 export function chooseUsersFromGroups(
   owner: string,
-  groups: { [key: string]: string[] } | undefined,
+  groups: {[key: string]: string[]} | undefined,
   desiredNumber: number
 ): string[] {
   let users: string[] = []
@@ -105,12 +105,12 @@ export function chooseUsersFromGroups(
 }
 
 export async function fetchConfigurationFile(client: github.GitHub, options) {
-  const { owner, repo, path, ref } = options
+  const {owner, repo, path, ref} = options
   const result = await client.repos.getContents({
     owner,
     repo,
     path,
-    ref,
+    ref
   })
 
   const data: any = result.data
