@@ -63,6 +63,7 @@ export class PullRequest {
 
     const changedFiles = listFilesResponse.data.map(f => f.filename)
     const patches = listFilesResponse.data.map(f => f.patch)
+    const realPatches = patches.filter(x => x != null && x != '') as string[]
 
     console.log('found changed files:')
     for (const file of changedFiles) {
@@ -71,7 +72,7 @@ export class PullRequest {
 
     var isRelevant = false
     console.log('found patches:')
-    for (const patchString of patches) {
+    for (const patchString of realPatches) {
       var patchList = patchString.split('\n')
       for (const patchLine of patchList) {
         if (patchLine.startsWith('+') && patchLine.includes('public')) {
