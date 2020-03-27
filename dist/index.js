@@ -28268,7 +28268,7 @@ function chooseAssignees(owner, config) {
     }
     else {
         const candidates = assignees ? assignees : reviewers;
-        chosenAssignees = chooseUsers(candidates, numberOfAssignees || numberOfReviewers, owner);
+        chosenAssignees = chooseUsers(candidates, numberOfAssignees || numberOfReviewers);
     }
     return chosenAssignees;
 }

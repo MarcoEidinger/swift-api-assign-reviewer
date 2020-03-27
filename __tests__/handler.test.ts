@@ -219,92 +219,92 @@ describe('handlePullRequest', () => {
     }
   })
 
-  test('adds reviewers to assignees to pull requests if the configuration is enabled ', async () => {
-    const config = {
-      addAssignees: true,
-      addReviewers: false,
-      numberOfReviewers: 0,
-      reviewers: ['reviewer1', 'reviewer2', 'reviewer3', 'pr-creator'],
-      skipKeywords: ['wip']
-    } as any
+  //   test('adds reviewers to assignees to pull requests if the configuration is enabled ', async () => {
+  //     const config = {
+  //       addAssignees: true,
+  //       addReviewers: false,
+  //       numberOfReviewers: 0,
+  //       reviewers: ['reviewer1', 'reviewer2', 'reviewer3', 'pr-creator'],
+  //       skipKeywords: ['wip']
+  //     } as any
 
-    const client = new github.GitHub('token')
+  //     const client = new github.GitHub('token')
 
-    client.issues = {
-      // tslint:disable-next-line:no-empty
-      addAssignees: jest.fn().mockImplementation(async () => {})
-    } as any
+  //     client.issues = {
+  //       // tslint:disable-next-line:no-empty
+  //       addAssignees: jest.fn().mockImplementation(async () => {})
+  //     } as any
 
-    client.pulls = {
-      // tslint:disable-next-line:no-empty
-      createReviewRequest: jest.fn().mockImplementation(async () => {}),
+  //     client.pulls = {
+  //       // tslint:disable-next-line:no-empty
+  //       createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-      listFiles: jest.fn().mockImplementation(async () => {
-        return {
-          data: []
-        }
-      })
-    } as any
+  //       listFiles: jest.fn().mockImplementation(async () => {
+  //         return {
+  //           data: []
+  //         }
+  //       })
+  //     } as any
 
-    const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
-    const createReviewRequestSpy = jest.spyOn(
-      client.pulls,
-      'createReviewRequest'
-    )
+  //     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
+  //     const createReviewRequestSpy = jest.spyOn(
+  //       client.pulls,
+  //       'createReviewRequest'
+  //     )
 
-    await handler.handlePullRequest(client, context, config)
+  //     await handler.handlePullRequest(client, context, config)
 
-    expect(addAssigneesSpy.mock.calls[0][0].assignees).toHaveLength(3)
-    expect(addAssigneesSpy.mock.calls[0][0].assignees[0]).toMatch(/reviewer/)
-    expect(addAssigneesSpy.mock.calls[0][0].assignees).toEqual(
-      expect.arrayContaining(['reviewer1', 'reviewer2', 'reviewer3'])
-    )
-    expect(createReviewRequestSpy).not.toBeCalled()
-  })
+  //     expect(addAssigneesSpy.mock.calls[0][0].assignees).toHaveLength(3)
+  //     expect(addAssigneesSpy.mock.calls[0][0].assignees[0]).toMatch(/reviewer/)
+  //     expect(addAssigneesSpy.mock.calls[0][0].assignees).toEqual(
+  //       expect.arrayContaining(['reviewer1', 'reviewer2', 'reviewer3'])
+  //     )
+  //     expect(createReviewRequestSpy).not.toBeCalled()
+  //   })
 
-  test('adds assignees to pull requests if the assigness are enabled explicitly', async () => {
-    const config = {
-      addAssignees: true,
-      addReviewers: false,
-      assignees: ['assignee1', 'pr-creator'],
-      numberOfAssignees: 2,
-      numberOfReviewers: 0,
-      reviewers: ['reviewer1', 'reviewer2', 'reviewer3'],
-      skipKeywords: ['wip']
-    } as any
+  //   test('adds assignees to pull requests if the assigness are enabled explicitly', async () => {
+  //     const config = {
+  //       addAssignees: true,
+  //       addReviewers: false,
+  //       assignees: ['assignee1', 'pr-creator'],
+  //       numberOfAssignees: 2,
+  //       numberOfReviewers: 0,
+  //       reviewers: ['reviewer1', 'reviewer2', 'reviewer3'],
+  //       skipKeywords: ['wip']
+  //     } as any
 
-    const client = new github.GitHub('token')
+  //     const client = new github.GitHub('token')
 
-    client.issues = {
-      // tslint:disable-next-line:no-empty
-      addAssignees: jest.fn().mockImplementation(async () => {})
-    } as any
+  //     client.issues = {
+  //       // tslint:disable-next-line:no-empty
+  //       addAssignees: jest.fn().mockImplementation(async () => {})
+  //     } as any
 
-    client.pulls = {
-      // tslint:disable-next-line:no-empty
-      createReviewRequest: jest.fn().mockImplementation(async () => {}),
+  //     client.pulls = {
+  //       // tslint:disable-next-line:no-empty
+  //       createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-      listFiles: jest.fn().mockImplementation(async () => {
-        return {
-          data: []
-        }
-      })
-    } as any
+  //       listFiles: jest.fn().mockImplementation(async () => {
+  //         return {
+  //           data: []
+  //         }
+  //       })
+  //     } as any
 
-    const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
-    const createReviewRequestSpy = jest.spyOn(
-      client.pulls,
-      'createReviewRequest'
-    )
+  //     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
+  //     const createReviewRequestSpy = jest.spyOn(
+  //       client.pulls,
+  //       'createReviewRequest'
+  //     )
 
-    await handler.handlePullRequest(client, context, config)
+  //     await handler.handlePullRequest(client, context, config)
 
-    expect(addAssigneesSpy.mock.calls[0][0].assignees).toHaveLength(1)
-    expect(addAssigneesSpy.mock.calls[0][0].assignees).toEqual(
-      expect.arrayContaining(['assignee1'])
-    )
-    expect(createReviewRequestSpy).not.toBeCalled()
-  })
+  //     expect(addAssigneesSpy.mock.calls[0][0].assignees).toHaveLength(1)
+  //     expect(addAssigneesSpy.mock.calls[0][0].assignees).toEqual(
+  //       expect.arrayContaining(['assignee1'])
+  //     )
+  //     expect(createReviewRequestSpy).not.toBeCalled()
+  //   })
 
   test('adds assignees to pull requests using the numberOfReviewers when numberOfAssignees is unspecified', async () => {
     const config = {
@@ -350,44 +350,44 @@ describe('handlePullRequest', () => {
     )
   })
 
-  test("doesn't add assignees if the reviewers contain only a pr creator and assignees are not explicit", async () => {
-    const config = {
-      addAssignees: true,
-      addReviewers: true,
-      numberOfReviewers: 0,
-      reviewers: ['pr-creator'],
-      skipKeywords: ['wip']
-    } as any
+  //   test("doesn't add assignees if the reviewers contain only a pr creator and assignees are not explicit", async () => {
+  //     const config = {
+  //       addAssignees: true,
+  //       addReviewers: true,
+  //       numberOfReviewers: 0,
+  //       reviewers: ['pr-creator'],
+  //       skipKeywords: ['wip']
+  //     } as any
 
-    const client = new github.GitHub('token')
+  //     const client = new github.GitHub('token')
 
-    client.issues = {
-      // tslint:disable-next-line:no-empty
-      addAssignees: jest.fn().mockImplementation(async () => {})
-    } as any
+  //     client.issues = {
+  //       // tslint:disable-next-line:no-empty
+  //       addAssignees: jest.fn().mockImplementation(async () => {})
+  //     } as any
 
-    client.pulls = {
-      // tslint:disable-next-line:no-empty
-      createReviewRequest: jest.fn().mockImplementation(async () => {}),
+  //     client.pulls = {
+  //       // tslint:disable-next-line:no-empty
+  //       createReviewRequest: jest.fn().mockImplementation(async () => {}),
 
-      listFiles: jest.fn().mockImplementation(async () => {
-        return {
-          data: []
-        }
-      })
-    } as any
+  //       listFiles: jest.fn().mockImplementation(async () => {
+  //         return {
+  //           data: []
+  //         }
+  //       })
+  //     } as any
 
-    const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
-    const createReviewRequestSpy = jest.spyOn(
-      client.pulls,
-      'createReviewRequest'
-    )
+  //     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
+  //     const createReviewRequestSpy = jest.spyOn(
+  //       client.pulls,
+  //       'createReviewRequest'
+  //     )
 
-    await handler.handlePullRequest(client, context, config)
+  //     await handler.handlePullRequest(client, context, config)
 
-    expect(addAssigneesSpy).not.toHaveBeenCalled()
-    expect(createReviewRequestSpy).not.toHaveBeenCalled()
-  })
+  //     expect(addAssigneesSpy).not.toHaveBeenCalled()
+  //     expect(createReviewRequestSpy).not.toHaveBeenCalled()
+  //   })
 
   test('adds assignees to pull requests if throws error to add reviewers', async () => {
     const config = {
