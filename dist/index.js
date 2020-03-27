@@ -3935,17 +3935,19 @@ class PullRequest {
             console.log(listFilesResponse);
             const changedFiles = listFilesResponse.data.map(f => f.filename);
             const patches = listFilesResponse.data.map(f => f.patch);
-            core.debug('found changed files:');
+            console.log('found changed files:');
             for (const file of changedFiles) {
-                core.debug('  ' + file);
+                console.log('  ' + file);
             }
-            core.debug('found changed files:');
+            console.log('found changed files:');
             for (const patch of patches) {
                 if (patch.startsWith('+') && patch.includes('public')) {
-                    core.debug('relevant: add');
+                    console.log('relevant: add');
+                    return true;
                 }
                 if (patch.startsWith('-') && patch.includes('public')) {
-                    core.debug('relevant: remove');
+                    console.log('relevant: remove');
+                    return true;
                 }
             }
             return true;
