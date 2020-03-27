@@ -1,10 +1,12 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'MeTestAction'
+description: 'MeTestAction'
+author: 'Marco Eidinger'
 inputs:
   myInput:              # change this
     description: 'input description here'
     default: 'default value if applicable'
+  repo-token:
+    description: 'The GITHUB_TOKEN secret'
 runs:
   using: 'node12'
   main: 'dist/index.js'
