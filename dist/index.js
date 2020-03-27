@@ -3941,7 +3941,8 @@ class PullRequest {
             }
             var isRelevant = false;
             console.log('found patches:');
-            for (const patchList of patches) {
+            for (const patchString of patches) {
+                var patchList = patchString.split('\n');
                 for (const patchLine of patchList) {
                     if (patchLine.startsWith('+') && patchLine.includes('public')) {
                         console.log('relevant: add');
