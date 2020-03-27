@@ -54,8 +54,7 @@ export function chooseAssignees(owner: string, config: Config): string[] {
     const candidates = assignees ? assignees : reviewers
     chosenAssignees = chooseUsers(
       candidates,
-      numberOfAssignees || numberOfReviewers,
-      owner
+      numberOfAssignees || numberOfReviewers
     )
   }
 
