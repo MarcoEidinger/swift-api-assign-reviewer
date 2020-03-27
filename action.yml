@@ -2,11 +2,12 @@ name: 'MeTestAction'
 description: 'MeTestAction'
 author: 'Marco Eidinger'
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
   repo-token:
-    description: 'The GITHUB_TOKEN secret'
+    description: 'A token for the repo'
+    required: true
+  configuration-path:
+    description: 'A path for the auto-assign configuration'
+    default: '.github/auto_assign.yml'
 runs:
   using: 'node12'
   main: 'dist/index.js'
