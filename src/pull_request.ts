@@ -69,17 +69,21 @@ export class PullRequest {
       console.log('  ' + file)
     }
 
-    console.log('found changed files:')
-    for (const patch of patches) {
-      if (patch.startsWith('+') && patch.includes('public')) {
-        console.log('relevant: add')
-        return true
-      }
-      if (patch.startsWith('-') && patch.includes('public')) {
-        console.log('relevant: remove')
-        return true
+    var isRelevant = false
+    console.log('found patches:')
+    for (const patchList of patches) {
+      for (const patchLine of patchList) {
+        if (patchLine.startsWith('+') && patchLine.includes('public')) {
+          console.log('relevant: add')
+          isRelevant = true
+        }
+        if (patchLine.startsWith('-') && patchLine.includes('public')) {
+          console.log('relevant: remove')
+          isRelevant = true
+        }
       }
     }
+    console.log(isRelevant)
 
     return true
   }
