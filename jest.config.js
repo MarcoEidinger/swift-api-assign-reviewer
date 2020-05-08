@@ -12,5 +12,6 @@ module.exports = {
 	  'ts-jest': {
 		tsConfig: './__tests__/tsconfig.jest.json'
 	  }
-	}
+	},
+	collectCoverage: true,
   }
