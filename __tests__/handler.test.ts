@@ -950,6 +950,43 @@ describe('handlePullRequest', () => {
     )
   })
 
+  test('do not add reviewers if its not a swift file', async () => {
+    const spy = jest.spyOn(core, 'info')
+
+    const config = {
+      addAssignees: false,
+      addReviewers: true,
+      filterLabels: {include: ['some_label', 'another_label']},
+      numberOfReviewers: 0,
+      reviewers: ['reviewer1', 'reviewer2', 'reviewer3', 'pr-creator']
+    } as any
+
+    const client = new github.GitHub('token')
+
+    context.payload.pull_request.labels = [{name: 'some_label'}]
+
+    client.pulls = {
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: [
+            {
+              filename: 'meep.sh',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tfunc yoo() {\n+\n+\t}\n+}'
+            }
+          ]
+        }
+      })
+    } as any
+
+    await handler.handlePullRequest(client, context, config)
+
+    expect(spy.mock.calls[0][0]).toEqual(
+      'Skips the process to add reviewers/assignees since PR has no relevant API changes'
+    )
+  })
+
   test('do not add reviewers if no open/public api changes occurred', async () => {
     const spy = jest.spyOn(core, 'info')
 
