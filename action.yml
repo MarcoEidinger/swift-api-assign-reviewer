@@ -1,5 +1,5 @@
-name: 'typescript-action'
-description: 'MeTestAction'
+name: 'auto-assign-when-swift-api-changes'
+description: 'Auto assign reviewer or assignee to pull request when open/public APIs were changed in Swift files'
 author: 'Marco Eidinger'
 inputs:
   repo-token:
