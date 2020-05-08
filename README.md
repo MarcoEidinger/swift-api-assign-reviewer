@@ -1,4 +1,5 @@
 ![Build](https://github.com/MarcoEidinger/typescript-action/workflows/Build/badge.svg)
+[![codecov](https://codecov.io/gh/MarcoEidinger/typescript-action/branch/master/graph/badge.svg)](https://codecov.io/gh/MarcoEidinger/typescript-action)
 
 # auto-assign-when-swift-api-changes
 
