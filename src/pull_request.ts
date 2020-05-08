@@ -57,7 +57,9 @@ export class PullRequest {
       return false
     }
 
-    const relevantFiles = listFilesResponse.data.filter(f => f.filename.includes('.swift') === true)
+    const relevantFiles = listFilesResponse.data.filter(
+      f => f.filename.includes('.swift') === true
+    )
     const patches = relevantFiles.map(f => f.patch)
     const realPatches = patches.filter(x => x != null && x !== '')
 
