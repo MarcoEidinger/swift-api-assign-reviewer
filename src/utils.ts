@@ -103,6 +103,7 @@ export function chooseUsersFromGroups(
   return users
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export async function fetchConfigurationFile(client: github.GitHub, options) {
   const {owner, repo, path, ref} = options
   const result = await client.repos.getContents({
@@ -112,6 +113,7 @@ export async function fetchConfigurationFile(client: github.GitHub, options) {
     ref
   })
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data: any = result.data
 
   if (!data.content) {

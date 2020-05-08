@@ -93,7 +93,7 @@ export async function handlePullRequest(
     }
   }
 
-  let isRelevant = await pr.isMatchingWith()
+  const isRelevant = await pr.isMatchingWith()
 
   if (addReviewers) {
     try {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import * as github from '@actions/github'
 import * as core from '@actions/core'
 import {Context} from '@actions/github/lib/context'
@@ -44,8 +45,8 @@ export class PullRequest {
   async isMatchingWith(): Promise<boolean> {
     const {owner, repo, number: issue_number} = this.context.issue
     const listFilesResponse = await this.client.pulls.listFiles({
-      owner: owner,
-      repo: repo,
+      owner,
+      repo,
       pull_number: issue_number
     })
 
@@ -63,17 +64,17 @@ export class PullRequest {
 
     const changedFiles = listFilesResponse.data.map(f => f.filename)
     const patches = listFilesResponse.data.map(f => f.patch)
-    const realPatches = patches.filter(x => x != null && x != '') as string[]
+    const realPatches = patches.filter(x => x != null && x !== '')
 
     console.log('found changed files:')
     for (const file of changedFiles) {
-      console.log('  ' + file)
+      console.log(`  ${file}`)
     }
 
-    var isRelevant = false
+    let isRelevant = false
     console.log('found patches:')
     for (const patchString of realPatches) {
-      var patchList = patchString.split('\n')
+      const patchList = patchString.split('\n')
       for (const patchLine of patchList) {
         if (patchLine.startsWith('+') && patchLine.includes('public')) {
           console.log('relevant: add')
@@ -86,7 +87,7 @@ export class PullRequest {
       }
     }
     console.log(isRelevant)
-
-    return true
   }
+
+  private func
 }

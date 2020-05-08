@@ -3,6 +3,7 @@ import * as github from '@actions/github'
 import * as utils from './utils'
 import * as handler from './handler'
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export async function run() {
   try {
     const token = core.getInput('repo-token', {required: true})
