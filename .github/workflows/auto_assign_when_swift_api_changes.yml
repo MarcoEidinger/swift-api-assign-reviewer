@@ -26,5 +26,5 @@ jobs:
         run: npm run format-check
 
       - uses: codecov/codecov-action@v1.0.7
-	    with:
+        with:
           file: ./coverage/clover.xml
