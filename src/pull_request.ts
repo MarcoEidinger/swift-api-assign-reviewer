@@ -86,8 +86,7 @@ export class PullRequest {
         }
       }
     }
-    console.log(isRelevant)
+	console.log(isRelevant)
+	return isRelevant
   }
-
-  private func
 }

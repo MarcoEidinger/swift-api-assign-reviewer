@@ -22,7 +22,7 @@
     "node",
     "setup"
   ],
-  "author": "YourNameOrOrganization",
+  "author": "Marco Eidinger",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.0",
