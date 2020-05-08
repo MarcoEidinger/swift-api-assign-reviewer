@@ -7,7 +7,7 @@ inputs:
     required: true
   configuration-path:
     description: 'A path for the auto-assign configuration'
-    default: '.github/auto_assign.yml'
+    default: '.github/auto_assign_when_swift_api_changes.yml'
 runs:
   using: 'node12'
   main: 'dist/index.js'

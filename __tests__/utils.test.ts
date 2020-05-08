@@ -202,7 +202,7 @@ describe('fetchConfigurationFile', () => {
     const config = await fetchConfigurationFile(client, {
       owner: 'kentaro-m',
       repo: 'auto-assign-action-test',
-      path: '.github/auto_assign',
+      path: '.github/auto_assign_when_swift_api_changes',
       ref: 'sha'
     })
 
@@ -228,7 +228,7 @@ describe('fetchConfigurationFile', () => {
       fetchConfigurationFile(client, {
         owner: 'kentaro-m',
         repo: 'auto-assign-action-test',
-        path: '.github/auto_assign',
+        path: '.github/auto_assign_when_swift_api_changes',
         ref: 'sha'
       })
     ).rejects.toThrow(/the configuration file is not found/)
