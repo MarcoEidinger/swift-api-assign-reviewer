@@ -95,6 +95,13 @@ export async function handlePullRequest(
 
   const isRelevant = await pr.isMatchingWith()
 
+  if (!isRelevant) {
+    core.info(
+      'Skips the process to add reviewers/assignees since PR has no relevant API changes'
+    )
+    return
+  }
+
   if (addReviewers) {
     try {
       const reviewers = utils.chooseReviewers(owner, config)

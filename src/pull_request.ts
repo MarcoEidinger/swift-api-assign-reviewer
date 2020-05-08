@@ -50,43 +50,36 @@ export class PullRequest {
       pull_number: issue_number
     })
 
-    if (listFilesResponse) {
-      console.log('ok ??')
-      if (listFilesResponse.hasOwnProperty('data') === true) {
-        console.log('has')
-      } else {
-        console.log('has not')
-        return true
-      }
+    if (
+      !listFilesResponse ||
+      listFilesResponse.hasOwnProperty('data') === false
+    ) {
+      return false
     }
 
-    console.log(listFilesResponse)
-
-    const changedFiles = listFilesResponse.data.map(f => f.filename)
     const patches = listFilesResponse.data.map(f => f.patch)
     const realPatches = patches.filter(x => x != null && x !== '')
 
-    console.log('found changed files:')
-    for (const file of changedFiles) {
-      console.log(`  ${file}`)
-    }
-
     let isRelevant = false
-    console.log('found patches:')
     for (const patchString of realPatches) {
       const patchList = patchString.split('\n')
       for (const patchLine of patchList) {
-        if (patchLine.startsWith('+') && patchLine.includes('public')) {
-          console.log('relevant: add')
+        if (
+          patchLine.startsWith('+') &&
+          (patchLine.includes('public') || patchLine.includes('open'))
+        ) {
+          // relevant: add
           isRelevant = true
         }
-        if (patchLine.startsWith('-') && patchLine.includes('public')) {
-          console.log('relevant: remove')
+        if (
+          patchLine.startsWith('-') &&
+          (patchLine.includes('public') || patchLine.includes('open'))
+        ) {
+          // relevant: remove
           isRelevant = true
         }
       }
     }
-	console.log(isRelevant)
-	return isRelevant
+    return isRelevant
   }
 }

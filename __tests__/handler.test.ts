@@ -128,7 +128,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -157,7 +163,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -194,7 +206,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -219,93 +237,6 @@ describe('handlePullRequest', () => {
     }
   })
 
-  //   test('adds reviewers to assignees to pull requests if the configuration is enabled ', async () => {
-  //     const config = {
-  //       addAssignees: true,
-  //       addReviewers: false,
-  //       numberOfReviewers: 0,
-  //       reviewers: ['reviewer1', 'reviewer2', 'reviewer3', 'pr-creator'],
-  //       skipKeywords: ['wip']
-  //     } as any
-
-  //     const client = new github.GitHub('token')
-
-  //     client.issues = {
-  //       // tslint:disable-next-line:no-empty
-  //       addAssignees: jest.fn().mockImplementation(async () => {})
-  //     } as any
-
-  //     client.pulls = {
-  //       // tslint:disable-next-line:no-empty
-  //       createReviewRequest: jest.fn().mockImplementation(async () => {}),
-
-  //       listFiles: jest.fn().mockImplementation(async () => {
-  //         return {
-  //           data: []
-  //         }
-  //       })
-  //     } as any
-
-  //     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
-  //     const createReviewRequestSpy = jest.spyOn(
-  //       client.pulls,
-  //       'createReviewRequest'
-  //     )
-
-  //     await handler.handlePullRequest(client, context, config)
-
-  //     expect(addAssigneesSpy.mock.calls[0][0].assignees).toHaveLength(3)
-  //     expect(addAssigneesSpy.mock.calls[0][0].assignees[0]).toMatch(/reviewer/)
-  //     expect(addAssigneesSpy.mock.calls[0][0].assignees).toEqual(
-  //       expect.arrayContaining(['reviewer1', 'reviewer2', 'reviewer3'])
-  //     )
-  //     expect(createReviewRequestSpy).not.toBeCalled()
-  //   })
-
-  //   test('adds assignees to pull requests if the assigness are enabled explicitly', async () => {
-  //     const config = {
-  //       addAssignees: true,
-  //       addReviewers: false,
-  //       assignees: ['assignee1', 'pr-creator'],
-  //       numberOfAssignees: 2,
-  //       numberOfReviewers: 0,
-  //       reviewers: ['reviewer1', 'reviewer2', 'reviewer3'],
-  //       skipKeywords: ['wip']
-  //     } as any
-
-  //     const client = new github.GitHub('token')
-
-  //     client.issues = {
-  //       // tslint:disable-next-line:no-empty
-  //       addAssignees: jest.fn().mockImplementation(async () => {})
-  //     } as any
-
-  //     client.pulls = {
-  //       // tslint:disable-next-line:no-empty
-  //       createReviewRequest: jest.fn().mockImplementation(async () => {}),
-
-  //       listFiles: jest.fn().mockImplementation(async () => {
-  //         return {
-  //           data: []
-  //         }
-  //       })
-  //     } as any
-
-  //     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
-  //     const createReviewRequestSpy = jest.spyOn(
-  //       client.pulls,
-  //       'createReviewRequest'
-  //     )
-
-  //     await handler.handlePullRequest(client, context, config)
-
-  //     expect(addAssigneesSpy.mock.calls[0][0].assignees).toHaveLength(1)
-  //     expect(addAssigneesSpy.mock.calls[0][0].assignees).toEqual(
-  //       expect.arrayContaining(['assignee1'])
-  //     )
-  //     expect(createReviewRequestSpy).not.toBeCalled()
-  //   })
-
   test('adds assignees to pull requests using the numberOfReviewers when numberOfAssignees is unspecified', async () => {
     const config = {
       addAssignees: true,
@@ -329,7 +260,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -350,45 +287,6 @@ describe('handlePullRequest', () => {
     )
   })
 
-  //   test("doesn't add assignees if the reviewers contain only a pr creator and assignees are not explicit", async () => {
-  //     const config = {
-  //       addAssignees: true,
-  //       addReviewers: true,
-  //       numberOfReviewers: 0,
-  //       reviewers: ['pr-creator'],
-  //       skipKeywords: ['wip']
-  //     } as any
-
-  //     const client = new github.GitHub('token')
-
-  //     client.issues = {
-  //       // tslint:disable-next-line:no-empty
-  //       addAssignees: jest.fn().mockImplementation(async () => {})
-  //     } as any
-
-  //     client.pulls = {
-  //       // tslint:disable-next-line:no-empty
-  //       createReviewRequest: jest.fn().mockImplementation(async () => {}),
-
-  //       listFiles: jest.fn().mockImplementation(async () => {
-  //         return {
-  //           data: []
-  //         }
-  //       })
-  //     } as any
-
-  //     const addAssigneesSpy = jest.spyOn(client.issues, 'addAssignees')
-  //     const createReviewRequestSpy = jest.spyOn(
-  //       client.pulls,
-  //       'createReviewRequest'
-  //     )
-
-  //     await handler.handlePullRequest(client, context, config)
-
-  //     expect(addAssigneesSpy).not.toHaveBeenCalled()
-  //     expect(createReviewRequestSpy).not.toHaveBeenCalled()
-  //   })
-
   test('adds assignees to pull requests if throws error to add reviewers', async () => {
     const config = {
       addAssignees: true,
@@ -407,7 +305,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -419,7 +323,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -451,7 +361,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -462,7 +378,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -544,7 +466,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -588,7 +516,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -637,7 +571,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -689,7 +629,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -738,7 +684,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -786,7 +738,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -834,7 +792,13 @@ describe('handlePullRequest', () => {
 
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -889,7 +853,13 @@ describe('handlePullRequest', () => {
       createReviewRequest: jest.fn().mockImplementation(async () => {}),
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   public class test5 {\n+\tpublic func yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -937,44 +907,7 @@ describe('handlePullRequest', () => {
     )
   })
 
-  //   test('skips pull requests that do not have any of the filterLabels.include labels', async () => {
-  //     const spy = jest.spyOn(core, 'info')
-
-  //     const client = new github.GitHub('token')
-  //     const config = {
-  //       filterLabels: { include: ['test_label'] },
-  //     } as any
-
-  //     context.payload.pull_request.labels = [{ name: 'some_label' }]
-
-  //     await handler.handlePullRequest(client, context, config)
-
-  //     expect(spy.mock.calls[0][0]).toEqual(
-  //       'Skips the process to add reviewers/assignees since PR is not tagged with any of the filterLabels.include'
-  //     )
-  //   })
-
-  //   test('skips pull requests that have any of the filterLabels.exclude labels', async () => {
-  //     const spy = jest.spyOn(core, 'info')
-
-  //     const client = new github.GitHub('token')
-  //     const config = {
-  //       filterLabels: { include: ['test_label'], exclude: ['wip'] },
-  //     } as any
-
-  //     context.payload.pull_request.labels = [
-  //       { name: 'test_label' },
-  //       { name: 'wip' },
-  //     ]
-
-  //     await handler.handlePullRequest(client, context, config)
-
-  //     expect(spy.mock.calls[0][0]).toEqual(
-  //       'Skips the process to add reviewers/assignees since PR is tagged with any of the filterLabels.exclude'
-  //     )
-  //   })
-
-  test('adds reviewers to the pull request when it has any of the configured labels', async () => {
+  test('adds reviewers to the pull request when open/public API changes occurred', async () => {
     const config = {
       addAssignees: false,
       addReviewers: true,
@@ -991,7 +924,13 @@ describe('handlePullRequest', () => {
       createReviewRequest: jest.fn().mockImplementation(async () => {}),
       listFiles: jest.fn().mockImplementation(async () => {
         return {
-          data: []
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   open class test5 {\n+\tfunc yoo() {\n+\n+\t}\n+}'
+            }
+          ]
         }
       })
     } as any
@@ -1008,6 +947,43 @@ describe('handlePullRequest', () => {
     expect(createReviewRequestSpy.mock.calls[0][0].reviewers).toHaveLength(3)
     expect(createReviewRequestSpy.mock.calls[0][0].reviewers[0]).toMatch(
       /reviewer/
+    )
+  })
+
+  test('do not add reviewers if no open/public api changes occurred', async () => {
+    const spy = jest.spyOn(core, 'info')
+
+    const config = {
+      addAssignees: false,
+      addReviewers: true,
+      filterLabels: {include: ['some_label', 'another_label']},
+      numberOfReviewers: 0,
+      reviewers: ['reviewer1', 'reviewer2', 'reviewer3', 'pr-creator']
+    } as any
+
+    const client = new github.GitHub('token')
+
+    context.payload.pull_request.labels = [{name: 'some_label'}]
+
+    client.pulls = {
+      createReviewRequest: jest.fn().mockImplementation(async () => {}),
+      listFiles: jest.fn().mockImplementation(async () => {
+        return {
+          data: [
+            {
+              filename: 'meep.swift',
+              patch:
+                '@@ -0,0 +1,5 @@\n+   class test5 {\n+\tfunc yoo() {\n+\n+\t}\n+}'
+            }
+          ]
+        }
+      })
+    } as any
+
+    await handler.handlePullRequest(client, context, config)
+
+    expect(spy.mock.calls[0][0]).toEqual(
+      'Skips the process to add reviewers/assignees since PR has no relevant API changes'
     )
   })
 })
