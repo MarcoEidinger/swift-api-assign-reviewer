@@ -1,4 +1,4 @@
-name: 'auto-assign-when-swift-api-changes'
+name: 'swift-api-assign-reviewer'
 description: 'Auto assign reviewer or assignee to pull request when open/public APIs were changed in Swift files'
 author: 'Marco Eidinger'
 inputs:
@@ -7,7 +7,7 @@ inputs:
     required: true
   configuration-path:
     description: 'A path for the auto-assign configuration'
-    default: '.github/auto_assign_when_swift_api_changes.yml'
+    default: '.github/swift_api_assign_reviewer.yml'
 runs:
   using: 'node12'
   main: 'dist/index.js'

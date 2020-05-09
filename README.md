@@ -1,13 +1,13 @@
-![Build](https://github.com/MarcoEidinger/typescript-action/workflows/Build/badge.svg)
-[![codecov](https://codecov.io/gh/MarcoEidinger/typescript-action/branch/master/graph/badge.svg)](https://codecov.io/gh/MarcoEidinger/typescript-action)
+![Build](https://github.com/MarcoEidinger/swift-api-assign-reviewer/workflows/Build/badge.svg)
+[![codecov](https://codecov.io/gh/MarcoEidinger/swift-api-assign-reviewer/branch/master/graph/badge.svg)](https://codecov.io/gh/MarcoEidinger/swift-api-assign-reviewer)
 
-# auto-assign-when-swift-api-changes
+# swift-api-assign-reviewer
 
 Auto assign reviewer or assignee to pull request when open/public APIs were changed in Swift files
 
 ## Configuration
 
-Install github action and create `.github/auto_assign_when_swift_api_changes.yml` in your repository
+Install github action and create `.github/swift_api_assign_reviewer.yml` in your repository
 
 ```yml
 # Set to true to add reviewers to pull requests
