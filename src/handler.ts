@@ -22,6 +22,7 @@ export interface Config {
   assigneeGroups: {[key: string]: string[]}
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export async function handlePullRequest(
   client: github.GitHub,
   context: Context,
@@ -108,12 +109,12 @@ export async function handlePullRequest(
 
       if (reviewers.length > 0) {
         await pr.addReviewers(reviewers)
-        console.log(`Added reviewers to PR #${number}: ${reviewers.join(', ')}`)
+        core.info(`Added reviewers to PR #${number}: ${reviewers.join(', ')}`)
       } else {
-        console.log('No reviewers')
+        core.info('No reviewers')
       }
     } catch (error) {
-      console.log(error.message)
+      core.info(error.message)
     }
   }
 
@@ -123,12 +124,12 @@ export async function handlePullRequest(
 
       if (assignees.length > 0) {
         await pr.addAssignees(assignees)
-        console.log(`Added assignees to PR #${number}: ${assignees.join(', ')}`)
+        core.info(`Added assignees to PR #${number}: ${assignees.join(', ')}`)
       } else {
-        console.log('No assignees')
+        core.info('No assignees')
       }
     } catch (error) {
-      console.log(error.message)
+      core.info(error.message)
     }
   }
 }

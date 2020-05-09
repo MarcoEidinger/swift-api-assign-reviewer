@@ -28632,6 +28632,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const utils = __importStar(__webpack_require__(611));
 const pull_request_1 = __webpack_require__(153);
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function handlePullRequest(client, context, config) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!context.payload.pull_request) {
@@ -28681,14 +28682,14 @@ function handlePullRequest(client, context, config) {
                 const reviewers = utils.chooseReviewers(owner, config);
                 if (reviewers.length > 0) {
                     yield pr.addReviewers(reviewers);
-                    console.log(`Added reviewers to PR #${number}: ${reviewers.join(', ')}`);
+                    core.info(`Added reviewers to PR #${number}: ${reviewers.join(', ')}`);
                 }
                 else {
-                    console.log('No reviewers');
+                    core.info('No reviewers');
                 }
             }
             catch (error) {
-                console.log(error.message);
+                core.info(error.message);
             }
         }
         if (addAssignees) {
@@ -28696,14 +28697,14 @@ function handlePullRequest(client, context, config) {
                 const assignees = utils.chooseAssignees(owner, config);
                 if (assignees.length > 0) {
                     yield pr.addAssignees(assignees);
-                    console.log(`Added assignees to PR #${number}: ${assignees.join(', ')}`);
+                    core.info(`Added assignees to PR #${number}: ${assignees.join(', ')}`);
                 }
                 else {
-                    console.log('No assignees');
+                    core.info('No assignees');
                 }
             }
             catch (error) {
-                console.log(error.message);
+                core.info(error.message);
             }
         }
     });
