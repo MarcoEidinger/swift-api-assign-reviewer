@@ -5,9 +5,48 @@
 
 GitHub action to detect access control changes (open/public) in Swift files and set reviewer/assignee to pull request 
 
+Example
+
+```yml
+name: API-Protection
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+
+  auto-assign-reviewer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: MarcoEidinger/swift-api-assign-reviewer@1.0.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          configuration-path: ".github/swift-api-assign-reviewer.yml"
+```
 ## Configuration
 
-Install github action and create `.github/swift_api_assign_reviewer.yml` in your repository
+Define a **configuration** file in your repository, e.g `.github/swift_api_assign_reviewer.yml`
+
+### Example
+
+```yml
+# Set to true to add reviewers to pull requests
+addReviewers: true
+
+# Set to true to add assignees to pull requests
+addAssignees: false
+
+# A list of reviewers to be added to pull requests (GitHub user name)
+reviewers:
+  - MarcoEidinger
+
+# A number of reviewers added to the pull request
+# Set 0 to add all the reviewers (default: 0)
+numberOfReviewers: 0
+```
+
+### Full Specification
 
 ```yml
 # Set to true to add reviewers to pull requests
@@ -34,26 +73,4 @@ numberOfReviewers: 0
 # Set to 0 to add all of the assignees.
 # Uses numberOfReviewers if unset.
 # numberOfAssignees: 2
-
-# A list of keywords to be skipped the process that add reviewers if pull requests include it
-# skipKeywords:
-#   - wip
 ```
-
-## Development
-
-Install the dependencies  
-```bash
-$ npm install
-```
-
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run pack
-```
-
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
-```
-
