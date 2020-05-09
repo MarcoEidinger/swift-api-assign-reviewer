@@ -2,7 +2,7 @@
   "name": "swift-api-assign-reviewer",
   "version": "1.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "GitHub action to detect access control changes (open/public) in Swift files and set reviewer/assignee to pull request ",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -18,9 +18,11 @@
     "url": "git+https://github.com/actions/swift-api-assign-reviewer.git"
   },
   "keywords": [
-    "actions",
-    "node",
-    "setup"
+	"github actions",
+	"code review",
+	"pull request",
+	"swift",
+	"access control"
   ],
   "author": "Marco Eidinger",
   "license": "MIT",

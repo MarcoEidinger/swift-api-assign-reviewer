@@ -3,7 +3,7 @@
 
 # swift-api-assign-reviewer
 
-Auto assign reviewer or assignee to pull request when open/public APIs were changed in Swift files
+GitHub action to detect access control changes (open/public) in Swift files and set reviewer/assignee to pull request 
 
 ## Configuration
 
