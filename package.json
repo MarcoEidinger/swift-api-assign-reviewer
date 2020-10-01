@@ -27,7 +27,7 @@
   "author": "Marco Eidinger",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.2.6",
     "@actions/github": "^2.2.0",
     "@types/js-yaml": "^3.12.3",
     "@types/lodash": "^4.14.150",
