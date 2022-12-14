@@ -6,12 +6,12 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
-      - name: setup node 12.x
-        uses: actions/setup-node@v1
+      - name: setup node 16
+        uses: actions/setup-node@v3
         with:
-          node-version: '12.x'
+          node-version: '16'
 
       - name: install
         run: npm install
@@ -25,6 +25,6 @@ jobs:
       - name: format check
         run: npm run format-check
 
-      - uses: codecov/codecov-action@v1.0.7
+      - uses: codecov/codecov-action@v3
         with:
           file: ./coverage/clover.xml
